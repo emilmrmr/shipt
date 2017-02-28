@@ -1,0 +1,90 @@
+package core;
+
+ 
+
+import java.util.concurrent.TimeUnit;
+
+import java.util.logging.*;
+
+import org.openqa.selenium.*;
+
+import org.openqa.selenium.chrome.*;
+
+ 
+
+public class Shipt {
+
+       public static void main(String[] args) throws InterruptedException {
+
+              String url = "http://www.shipt.com";
+
+              Logger logger = Logger.getLogger("");
+
+              logger.setLevel(Level.OFF);
+
+              WebDriver driver;
+
+       System.setProperty("webdriver.chrome.driver","./src/main/resources/webdrivers/mac/chromedriver");
+
+              System.setProperty("webdriver.chrome.silentOutput", "true");
+
+              ChromeOptions option = new ChromeOptions();
+
+              option.addArguments("-start-fullscreen");
+
+              driver = new ChromeDriver(option);
+
+              driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+ 
+
+              driver.get(url);
+
+ 
+
+              driver.findElement(By.xpath("//ul[2]/li[3]/a")).click();
+
+              driver.findElement(By.xpath("//div/label[1]/input")).sendKeys("qatest@shipt.com");;
+
+              driver.findElement(By.xpath("//div/label[2]/input")).sendKeys("Sh1pt123!");;
+
+              driver.findElement(By.id("start_shopping_login_button")).click();
+
+ 
+
+              Thread.sleep(2000);
+
+             
+
+              driver.findElement(By.xpath("//ion-nav-view/ion-view/div/button[1]")).click();
+
+              Thread.sleep(2000);
+
+              driver.findElement(By.xpath("//div[6]/div/ion-popover-view/ion-content/div/div[2]/ion-list/div/ion-item[1]")).click();
+
+              Thread.sleep(2000);
+
+              driver.findElement(By.xpath("//ion-content/div/div/div[2]/div/div/div[1]/ion-item/div[1]/div[4]/button[2]")).click();
+
+              Thread.sleep(2000);
+
+              driver.findElement(By.xpath("//div[1]/ion-header-bar/div[3]/span/web-cart-button/button")).click();
+
+              Thread.sleep(2000);
+
+              String item = driver.findElement(By.xpath("//ion-nav-view/ion-view[3]/ion-content/div/div/div[1]/div[1]/div/div[2]/div[3]/div/p")).getText();
+
+              String quantity = driver.findElement(By.xpath("//ion-view[3]/ion-content/div/div/div[1]/div[1]/div/div[2]/div[2]/span")).getText();
+
+  
+
+              System.out.println("Item: " + item + "Quantity: " + quantity);
+
+             
+
+       driver.quit();
+
+              }
+
+       }
+
